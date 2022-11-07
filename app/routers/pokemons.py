@@ -15,3 +15,8 @@ def get_pokemons(skip: int = 0, limit: int = 100, database: Session = Depends(ge
     """
     pokemons = actions.get_pokemons(database, skip=skip, limit=limit)
     return pokemons
+
+@router.get("/battle", response_model = List[schemas.Pokemon])
+def fight_pokemons(P1: int, P2: int):
+    fight_init = actions.initiate_duel(P1, P2)
+    return fight_init
